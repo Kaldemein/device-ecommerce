@@ -1,4 +1,3 @@
-import Admin from './pages/Admin';
 import {
   ADMIN_ROUTE,
   BASKET_ROUTE,
@@ -7,6 +6,7 @@ import {
   REGISTRATION_ROUTE,
   SHOP_ROUTE,
 } from './utils/consts';
+import Admin from './pages/Admin';
 import Basket from './pages/Basket';
 import Shop from './pages/Shop';
 import Auth from './pages/Auth';

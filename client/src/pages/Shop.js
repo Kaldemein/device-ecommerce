@@ -8,8 +8,8 @@ import DeviceList from '../components/DeviceList';
 const Shop = () => {
   return (
     <Container>
-      <div className="d-flex mt-2">
-        <Col md={3}>
+      <div className="d-flex mt-4">
+        <Col md={2}>
           <TypeBar />
         </Col>
         <Col md={9}>
