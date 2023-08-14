@@ -5,27 +5,33 @@ import star from '../assets/star.svg';
 import Card from 'react-bootstrap/esm/Card';
 import { useNavigate } from 'react-router-dom';
 import { DEVICE_ROUTE } from '../utils/consts';
+import { Context } from '..';
+import { observer } from 'mobx-react-lite';
 
-const DeviceItem = ({ device }) => {
+const DeviceItem = observer(({ item }) => {
+  const { device } = React.useContext(Context);
   const navigate = useNavigate();
+  const type = device.types.find((type) => item.typeId === type.id);
+  console.log(type);
+
   return (
     <Col md={3} style={{ width: 250, cursor: 'pointer' }} border={'light'} className="me-1">
       <Card
-        onClick={() => navigate(DEVICE_ROUTE + '/' + device.id)}
+        onClick={() => navigate(DEVICE_ROUTE + '/' + item.id)}
         style={{ width: 250, cursor: 'pointer' }}
         border={'light'}>
-        <Image width={250} height={250} src={process.env.REACT_APP_API_URL + device.img} />
+        <Image width={250} height={250} src={process.env.REACT_APP_API_URL + item.img} />
         <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
-          <div>Samsung...</div>
+          <div>{type && type.name}</div>
           <div className="d-flex align-items-center">
-            <div>{device.rating}</div>
+            <div>{item.rating}</div>
             <Image width={18} height={18} src={star} />
           </div>
         </div>
-        <div>{device.name}</div>
+        <div>{item.name}</div>
       </Card>
     </Col>
   );
-};
+});
 
 export default DeviceItem;
