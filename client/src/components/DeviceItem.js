@@ -8,7 +8,6 @@ import { DEVICE_ROUTE } from '../utils/consts';
 
 const DeviceItem = ({ device }) => {
   const navigate = useNavigate();
-
   return (
     <Col md={3} style={{ width: 250, cursor: 'pointer' }} border={'light'} className="me-1">
       <Card

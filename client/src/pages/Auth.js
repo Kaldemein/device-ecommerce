@@ -4,21 +4,34 @@ import Form from 'react-bootstrap/esm/Form';
 import Card from 'react-bootstrap/esm/Card';
 import Button from 'react-bootstrap/esm/Button';
 import { NavLink, useLocation } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
 import { login, registration } from '../http/userAPI';
+import { Context } from '..';
+import { useNavigate } from 'react-router-dom';
 
-const Auth = () => {
+const Auth = observer(() => {
+  const { user } = React.useContext(Context);
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const navigate = useNavigate();
 
   const click = async (event) => {
-    if (isLogin) {
-      const response = await login(email, password);
-    } else {
-      const response = await registration(email, password);
+    try {
+      let data;
+      if (isLogin) {
+        data = await login(email, password);
+      } else {
+        data = await registration(email, password);
+      }
+      user.setUser(user);
+      user.setIsAuth(true);
+      navigate('/');
+    } catch (error) {
+      alert(error);
     }
   };
   return (
@@ -43,15 +56,29 @@ const Auth = () => {
           />
           <div className="d-flex justify-content-between mt-3">
             {isLogin ? (
-              <NavLink
-                style={{ textDecoration: 'underline', color: 'Blue' }}
-                to={REGISTRATION_ROUTE}>
+              <Button
+                style={{
+                  textDecoration: 'underline',
+                  backgroundColor: 'transparent',
+                  color: 'Blue',
+                  border: 'none',
+                  padding: 0,
+                }}
+                onClick={() => navigate(REGISTRATION_ROUTE)}>
                 Зарегестрироваться
-              </NavLink>
+              </Button>
             ) : (
-              <NavLink style={{ textDecoration: 'underline', color: 'Blue' }} to={LOGIN_ROUTE}>
+              <Button
+                style={{
+                  textDecoration: 'underline',
+                  backgroundColor: 'transparent',
+                  color: 'Blue',
+                  border: 'none',
+                  padding: 0,
+                }}
+                onClick={() => navigate(LOGIN_ROUTE)}>
                 Войти
-              </NavLink>
+              </Button>
             )}
 
             <Button onClick={click} className="align-self-end" variant="outline-success">
@@ -62,6 +89,6 @@ const Auth = () => {
       </Card>
     </Container>
   );
-};
+});
 
 export default Auth;

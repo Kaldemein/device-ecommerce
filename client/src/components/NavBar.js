@@ -13,7 +13,11 @@ const NavBar = observer(() => {
   const navigate = useNavigate();
   const { user } = React.useContext(Context);
 
-  console.log(user.isAuth);
+  const logOut = () => {
+    user.setUser({});
+    user.setIsAuth(false);
+    localStorage.removeItem('token');
+  };
 
   return (
     <Navbar className="bg-body-tertiary">
@@ -29,14 +33,17 @@ const NavBar = observer(() => {
               <Button onClick={() => navigate(ADMIN_ROUTE)} variant={'outline-dark'}>
                 Админ панель
               </Button>
-              <Button onClick={() => user.setIsAuth(false)} variant={'dark'} className="ms-2">
+              <Button onClick={() => logOut()} variant={'dark'} className="ms-2">
                 Выйти
               </Button>
             </Nav>
           ) : (
             <Nav>
-              <Button variant={'dark'} onClick={() => user.setIsAuth(true)}>
+              <Button className="me-2" variant={'dark'} onClick={() => navigate('/registration')}>
                 Зарегестрироваться
+              </Button>
+              <Button variant={'outline-dark'} onClick={() => navigate('/login')}>
+                Войти
               </Button>
             </Nav>
           )}

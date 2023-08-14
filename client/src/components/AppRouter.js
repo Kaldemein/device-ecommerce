@@ -10,7 +10,6 @@ import Basket from '../pages/Basket';
 const AppRouter = () => {
   const { user } = useContext(Context);
 
-  console.log(user.isAuth);
   return (
     <Routes>
       {/* {user.isAuth &&

@@ -2,64 +2,9 @@ import { makeAutoObservable } from 'mobx';
 
 export default class DeviceStore {
   constructor() {
-    this._types = [
-      {
-        id: 1,
-        name: 'Холодильник',
-      },
-      {
-        id: 2,
-        name: 'Смартфоны',
-      },
-      {
-        id: 3,
-        name: 'Телевизоры',
-      },
-      {
-        id: 4,
-        name: 'Пылесосы',
-      },
-    ];
-    this._brands = [
-      {
-        id: 1,
-        name: 'Samsung',
-      },
-      {
-        id: 2,
-        name: 'Apple',
-      },
-    ];
-    this._devices = [
-      {
-        id: 1,
-        name: 'Iphone 12 pro',
-        price: 25000,
-        rating: 5,
-        img: 'https://apple-com.ru/image/cache/catalog/product/iphone%2012%20pro%20max/825ba5c5f35acea402daa6cd3833b2c6-800x700h.jpg.webp',
-      },
-      {
-        id: 1,
-        name: 'Iphone 12 pro',
-        price: 25000,
-        rating: 5,
-        img: 'https://apple-com.ru/image/cache/catalog/product/iphone%2012%20pro%20max/825ba5c5f35acea402daa6cd3833b2c6-800x700h.jpg.webp',
-      },
-      {
-        id: 1,
-        name: 'Iphone 12 pro',
-        price: 25000,
-        rating: 5,
-        img: 'https://apple-com.ru/image/cache/catalog/product/iphone%2012%20pro%20max/825ba5c5f35acea402daa6cd3833b2c6-800x700h.jpg.webp',
-      },
-      {
-        id: 1,
-        name: 'Iphone 12 pro',
-        price: 25000,
-        rating: 5,
-        img: 'https://apple-com.ru/image/cache/catalog/product/iphone%2012%20pro%20max/825ba5c5f35acea402daa6cd3833b2c6-800x700h.jpg.webp',
-      },
-    ];
+    this._types = [];
+    this._brands = [];
+    this._devices = [];
     this._selectedType = {};
     this._selectedBrand = {};
 
