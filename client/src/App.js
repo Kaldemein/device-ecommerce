@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
-import NavBar from './components/NavBar';
+import NavBar from './components/NavBar/NavBar';
 import React, { useContext } from 'react';
 import { Context } from '.';
 import { observer } from 'mobx-react-lite';
@@ -14,11 +14,14 @@ const App = observer(() => {
     if (localStorage.getItem('token')) {
       user.setUser(true);
       user.setIsAuth(true);
+      setLoading(true);
     }
     check()
       .then((data) => {
-        user.setUser(true);
-        user.setIsAuth(true);
+        if (localStorage.getItem('token')) {
+          user.setUser(true);
+          user.setIsAuth(true);
+        }
       })
       .finally(() => setLoading(true));
   }, []);

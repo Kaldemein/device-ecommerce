@@ -1,4 +1,5 @@
 import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
@@ -8,18 +9,19 @@ const BrandBar = observer(() => {
   const { device } = useContext(Context);
 
   return (
-    <div className="d-flex">
+    <ListGroup>
+      <h5 className="p-2 mt-5">Производитель</h5>
       {device.brands.map((brand) => (
-        <Card
-          style={{ cursor: 'pointer' }}
+        <ListGroup.Item
+          style={({ cursor: 'pointer' }, { borderRadius: 0 })}
           onClick={() => device.setSelectedBrand(brand)}
-          border={brand.id === device.selectedBrand.id ? 'danger' : 'light'}
+          active={brand.id === device.selectedBrand.id}
           key={brand.id}
-          className="p-3">
+          className="p-2 me-3">
           {brand.name}
-        </Card>
+        </ListGroup.Item>
       ))}
-    </div>
+    </ListGroup>
   );
 });
 

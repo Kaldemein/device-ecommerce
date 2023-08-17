@@ -1,0 +1,14 @@
+.deviceItem{
+  .card{
+    padding:15px;
+    transition: all 0.2s ease-in-out;
+    &:hover{
+      -webkit-box-shadow: 0px 5px 8px 0px rgba(34, 60, 80, 0.2);
+      -moz-box-shadow: 0px 5px 8px 0px rgba(34, 60, 80, 0.2);
+      box-shadow: 0px 5px 8px 0px rgba(34, 60, 80, 0.2);
+      transform: translateY(-10px);
+    }
+  }
+}
+
+

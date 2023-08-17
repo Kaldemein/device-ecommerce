@@ -8,6 +8,8 @@ const TypeBar = observer(() => {
   const { device } = useContext(Context);
   return (
     <ListGroup>
+      <h5 className="p-2">Категория</h5>
+
       {device.types.map((type) => (
         <ListGroup.Item
           style={{ cursor: 'pointer' }}

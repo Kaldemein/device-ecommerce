@@ -1,13 +1,15 @@
 import React from 'react';
-import { Context } from '../index';
+import { Context } from '../../index';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../../utils/consts';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
-import logoPng from '../assets/logo.png';
+import logoPng from '../../assets/logo.png';
+
+import style from './NavBar.scss';
 
 const NavBar = observer(() => {
   const navigate = useNavigate();
@@ -20,11 +22,11 @@ const NavBar = observer(() => {
   };
 
   return (
-    <Navbar className="bg-body-tertiary">
+    <Navbar>
       <Container>
         <Navbar.Brand href={SHOP_ROUTE}>
           <img width={45} src={logoPng} />
-          lectron
+          electron.
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
@@ -39,10 +41,16 @@ const NavBar = observer(() => {
             </Nav>
           ) : (
             <Nav>
-              <Button className="me-2" variant={'dark'} onClick={() => navigate('/registration')}>
+              <Button
+                className="me-2 d-flex align-items-center"
+                variant={'dark'}
+                onClick={() => navigate('/registration')}>
                 Зарегестрироваться
               </Button>
-              <Button variant={'outline-dark'} onClick={() => navigate('/login')}>
+              <Button
+                className="me-2 d-flex align-items-center"
+                variant={'outline-dark'}
+                onClick={() => navigate('/login')}>
                 Войти
               </Button>
             </Nav>

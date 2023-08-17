@@ -25,8 +25,8 @@ const DevicePage = () => {
 
         <Image
           className="mt-3"
-          width={500}
-          height={450}
+          width={400}
+          height={350}
           src={process.env.REACT_APP_API_URL + device.img}
         />
         <div className="d-flex flex-column align-items-center"></div>
