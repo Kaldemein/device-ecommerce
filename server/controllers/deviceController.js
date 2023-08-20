@@ -2,6 +2,7 @@ const uuid = require('uuid');
 const path = require('path');
 const { Device, DeviceInfo } = require('../models/models');
 const ApiError = require('../error/ApiError');
+const fetchDevicesQuery = require('../queryObjects/fetchDevicesQuery');
 
 class DeviceController {
   async create(req, res, next) {
@@ -31,27 +32,7 @@ class DeviceController {
   }
 
   async getAll(req, res) {
-    let { typeId, brandId, limit, page } = req.query;
-    page = page || 1;
-    limit = limit || 9;
-    let offset = page * limit - limit;
-    let devices;
-    if (!brandId && !typeId) {
-      devices = await Device.findAndCountAll({ limit, offset });
-    }
-    if (brandId && !typeId) {
-      devices = await Device.findAndCountAll({ where: { brandId: brandId, limit, offset } });
-    }
-    if (!brandId && typeId) {
-      devices = await Device.findAndCountAll({ where: { typeId: typeId }, limit, offset });
-    }
-    if (brandId && typeId) {
-      devices = await Device.findAndCountAll({
-        where: { typeId: typeId, brandId: brandId },
-        limit,
-        offset,
-      });
-    }
+    const devices = await fetchDevicesQuery.all(req.query);
     return res.json(devices);
   }
 
