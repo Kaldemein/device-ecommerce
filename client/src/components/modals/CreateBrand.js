@@ -12,10 +12,14 @@ function CreateBrand() {
   const handleShow = () => setShow(true);
 
   const onAdd = () => {
-    createBrand({ name: value }).then((data) => {
-      setValue('');
-      setShow(false);
-    });
+    if (value) {
+      createBrand({ name: value }).then((data) => {
+        setValue('');
+        setShow(false);
+      });
+    } else {
+      alert('Введите название бренда');
+    }
   };
 
   return (
@@ -32,10 +36,8 @@ function CreateBrand() {
           <Form>
             <Form.Control
               value={value}
-              onChange={(e) =>
-                value ? setValue(e.target.value) : alert('Введите название бренда')
-              }
-              placeholder={'Введите название типа'}
+              onChange={ (e) => setValue(e.target.value) }
+              placeholder={'Введите название бренда'}
             />
           </Form>
         </Modal.Body>

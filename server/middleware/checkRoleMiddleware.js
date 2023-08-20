@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { User } = require('../models/models');
 
 module.exports = function (role) {
   return function (req, res, next) {
@@ -11,11 +12,15 @@ module.exports = function (role) {
         return res.status(401).json({ message: 'Не авторизован' });
       }
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
-      if (decoded.role !== role) {
-        return res.status(403).send({ message: 'Нет доступа' });
-      }
-      req.user = decoded;
-      next();
+      const userPromise = User.findOne({ where: { id: decoded.id } })
+      userPromise.then((user) => {
+        if (user.role == role) {
+          req.user = user
+          next();
+        } else {
+          throw new Error('Роль не соотсветствует');
+        }
+      }).catch((_) => res.status(403).send({ message: 'Нет доступа' }));
     } catch (e) {
       res.status(401).json({ message: 'Не авторизован' });
     }

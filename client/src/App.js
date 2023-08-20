@@ -16,14 +16,15 @@ const App = observer(() => {
       user.setIsAuth(true);
       setLoading(true);
     }
-    check()
-      .then((data) => {
-        if (localStorage.getItem('token')) {
-          user.setUser(true);
-          user.setIsAuth(true);
-        }
-      })
-      .finally(() => setLoading(true));
+    // The next code not working:
+    // check()
+    //   .then((data) => {
+    //     if (localStorage.getItem('token')) {
+    //       user.setUser(true);
+    //       user.setIsAuth(true);
+    //     }
+    //   })
+    //   .finally(() => setLoading(true));
   }, []);
 
   return (
